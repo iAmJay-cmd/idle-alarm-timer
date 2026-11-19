@@ -291,11 +291,9 @@ class SciFiIdleTimerApp:
         self.root.geometry(f"+{x}+{y}")
 
     def apply_taskbar_icon(self):
-        if getattr(sys, "frozen", False):
-            base_dir = os.path.dirname(sys.executable)
-        else:
-            base_dir = os.path.dirname(os.path.abspath(__file__))
-        ico_path = os.path.join(base_dir, "timer_icon.ico")
+        temp_dir = os.path.join(tempfile.gettempdir(), "IdleAlarmTimerAudio")
+        os.makedirs(temp_dir, exist_ok=True)
+        ico_path = os.path.join(temp_dir, "timer_icon.ico")
         generate_taskbar_ico(ico_path)
         self.root.iconbitmap(default=ico_path)
 
